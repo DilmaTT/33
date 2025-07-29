@@ -36,6 +36,7 @@ interface PokerMatrixProps {
   readOnly?: boolean;
   isBackgroundMode?: boolean;
   sizeVariant?: 'default' | 'editorPreview'; // New prop for sizing
+  initialScale?: number;
 }
 
 const getActionColor = (actionId: string, buttons: ActionButton[]): string => {
@@ -50,13 +51,13 @@ const getActionColor = (actionId: string, buttons: ActionButton[]): string => {
   return '#ffffff'; 
 };
 
-export const PokerMatrix = ({ selectedHands, onHandSelect, activeAction, actionButtons, readOnly = false, isBackgroundMode = false, sizeVariant = 'default' }: PokerMatrixProps) => {
+export const PokerMatrix = ({ selectedHands, onHandSelect, activeAction, actionButtons, readOnly = false, isBackgroundMode = false, sizeVariant = 'default', initialScale }: PokerMatrixProps) => {
   const isMobile = useIsMobile();
   const [isDragging, setIsDragging] = useState(false);
   const [dragMode, setDragMode] = useState<'select' | 'deselect' | null>(null);
   const lastHandSelectedDuringDrag = useRef<string | null>(null);
-  // Initialize zoomLevel to 0.85 (15% reduction) for desktop, 1 for mobile
-  const [zoomLevel, setZoomLevel] = useState<number>(isMobile ? 1 : 0.85);
+  // Initialize zoomLevel. Use initialScale if provided, otherwise default.
+  const [zoomLevel, setZoomLevel] = useState<number>(initialScale ?? (isMobile ? 1 : 0.85));
 
   // If in background mode, disable dragging and force readOnly
   useEffect(() => {

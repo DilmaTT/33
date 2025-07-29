@@ -8,6 +8,7 @@ import { X, Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRangeContext, ActionButton } from "@/contexts/RangeContext";
 import { useToast } from "@/hooks/use-toast";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface TrainingSessionProps {
   training: any;
@@ -83,6 +84,7 @@ const getActionButtonStyle = (button: ActionButton, allButtons: ActionButton[]) 
 export const TrainingSession = ({ training, onStop }: TrainingSessionProps) => {
   const { folders, actionButtons } = useRangeContext();
   const { toast } = useToast();
+  const isMobile = useIsMobile();
   
   const [currentHandIndex, setCurrentHandIndex] = useState(0);
   const [currentRangeIndex, setCurrentRangeIndex] = useState(0);
@@ -492,7 +494,7 @@ export const TrainingSession = ({ training, onStop }: TrainingSessionProps) => {
               </div>
             ) : (
               // Border repeat training interface
-              <div className="space-y-2 sm:space-y-3">
+              <div className="space-y-2 sm:space-y-2">
                 <div className="overflow-x-auto pb-1 -mt-6 sm:mt-0">
                   <PokerMatrix
                     selectedHands={showCorrectRange ? currentRange.hands : userMatrix}
@@ -500,6 +502,7 @@ export const TrainingSession = ({ training, onStop }: TrainingSessionProps) => {
                     activeAction={activeAction}
                     actionButtons={actionButtons}
                     readOnly={isChecked}
+                    initialScale={!isMobile ? 0.64 : 1}
                   />
                 </div>
 
