@@ -320,11 +320,6 @@ export const TrainingSession = ({ training, onStop }: TrainingSessionProps) => {
       <div className="hidden sm:block w-80 bg-card border-r p-4 space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold">Статистика</h2>
-          <div className="flex gap-2">
-            <Button size="sm" variant="destructive" onClick={finishTraining}>
-              Завершить
-            </Button>
-          </div>
         </div>
         
         <div className="space-y-3">
