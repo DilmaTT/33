@@ -178,7 +178,7 @@ export const PokerMatrix = ({ selectedHands, onHandSelect, activeAction, actionB
     "w-full h-full aspect-square font-mono border transition-all duration-200",
     "hover:ring-2 hover:ring-ring",
     "rounded-md",
-    isMobile ? "text-[10px] p-0" : "text-xs p-0.5"
+    isMobile ? "text-xs p-0" : "text-sm p-0.5"
   );
 
   const matrixContent = (
